@@ -47,8 +47,22 @@ price_change = data["Close"].diff()
 gains = price_change.clip(lower = 0)
 losses = -price_change.clip(upper = 0)
 
+# we have to average the gains and losses
+# relative strength = avg gain / avg loss
+avg_gains = gains.rolling(window=14).mean()
+avg_losses = losses.rolling(window=14).mean()
+rs = avg_gains / avg_losses
 
-#data["RSI_14"] =
+# use RSI formula to calculate
+# if avg gains are much larger than avg losses then rsi is closer to 100 and vice versa
+# we are looking at a 14 day rolling window so its RSI_14
+data["RSI_14"] = 100 - (100 / (1 + rs))
+
+# make a column that has the next days closing price using shift
+data["Close_Shifted"] = data["Close"].shift(-1)
+
+# create column named tomorrow_up that displays 1 if it goes up the next day and 0 if it goes down
+data["Tomorrow_Up"] = (data["Close_Shifted"] > data["Close"]).astype(int)
 
 # prints only specified columns from data
-print ( data[["Volume", "Volume_Change"]].tail(10) )
+print ( data[["Close", "Close_Shifted", "Tomorrow_Up"]].tail(10) )
