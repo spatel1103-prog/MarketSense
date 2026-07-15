@@ -16,4 +16,6 @@ MarketSense is a machine learning project that analyzes historical stock market 
   - Momentum
   - Volatility
   - Volume Change
-- RSI (in progress)
+- 14 day relative strength index (RSI)
+- ML target variable:
+  - Tomorrow_Up (1 if the next trading day's closing price is higher than today's, otherwise 0)
