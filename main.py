@@ -1,6 +1,10 @@
 import yfinance as yf
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
 
-stock = yf.Ticker("AAPL")
+ticker = input("Enter a stock ticker: ").upper()
+stock = yf.Ticker(ticker)
 
 # gets aapl stock data from past 5 years
 data = stock.history(period="5y")
@@ -64,5 +68,40 @@ data["Close_Shifted"] = data["Close"].shift(-1)
 # create column named tomorrow_up that displays 1 if it goes up the next day and 0 if it goes down
 data["Tomorrow_Up"] = (data["Close_Shifted"] > data["Close"]).astype(int)
 
-# prints only specified columns from data
-print ( data[["Close", "Close_Shifted", "Tomorrow_Up"]].tail(10) )
+# remove rows with NaN
+clean_data = data.dropna()
+
+# X = info we give the model to use (columns we have created)
+# y = what we're trying to predict (tomorrow up)
+
+X = clean_data[[
+        "Daily_Return", "MA_5_Distance",
+        "MA_20_Distance", "Momentum_5",
+        "Volatility_20", "Volume_Change", "RSI_14"
+    ]]
+
+y = clean_data["Tomorrow_Up"]
+
+# train on 80% of the data and test on 20%
+# dont shuffle data because this data is chronological
+X_train, X_test, y_train, y_test = train_test_split ( X, y, test_size=0.2, shuffle=False)
+
+# create logistic regression model object
+model = LogisticRegression()
+
+# model looks at training examples and tries to learn patterns between X and y
+model.fit( X_train, y_train )
+
+# predictions is a NumPy array now not a dataframe
+predictions = model.predict(X_test)
+
+# print predicitions the model made
+# :10 because we slice it like a python list
+print ( predictions[:10] )
+
+## see what actual results were
+print ( y_test.head(10) )
+
+## calculates accuracy of model using its results and the real results
+accuracy = accuracy_score (y_test, predictions)
+print(f"Model Accuracy: {accuracy:.2%}")
