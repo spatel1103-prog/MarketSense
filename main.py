@@ -2,6 +2,7 @@ import yfinance as yf
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
+import matplotlib.pyplot as plt
 
 ticker = input("Enter a stock ticker: ").upper()
 stock = yf.Ticker(ticker)
@@ -105,3 +106,19 @@ print ( y_test.head(10) )
 ## calculates accuracy of model using its results and the real results
 accuracy = accuracy_score (y_test, predictions)
 print(f"Model Accuracy: {accuracy:.2%}")
+
+# create graph
+plt.figure ( figsize =(12,6) )
+
+# draws lines on the graph
+plt.plot(data.index, data["Close"], label="Closing Price")
+plt.plot( data.index, data["MA_5"], label="5-Day Moving Average")
+plt.plot( data.index, data["MA_20"], label="20-Day Moving Average")
+
+plt.title(f"{ticker} Stock Price")
+plt.xlabel("Date")
+plt.ylabel("Price ($)")
+
+# display graph and legend
+plt.legend()
+plt.show()
