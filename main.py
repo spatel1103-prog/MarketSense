@@ -4,6 +4,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 import matplotlib.pyplot as plt
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
 
 ticker = input("Enter a stock ticker: ").upper()
 stock = yf.Ticker(ticker)
@@ -11,15 +12,15 @@ stock = yf.Ticker(ticker)
 # stock.info is a python dictionary that gives info abt the company
 info = stock.info
 
-# print info about comapny
+# print info about company
 print("\nCompany Information")
 print("--------------------")
 print(f"Company: {info['longName']}")
 print(f"Sector: {info['sector']}")
-print(f"Current Price: ${info['currentPrice']: .2f}")
+print(f"Current Price: ${info['currentPrice']:.2f}")
 print(f"Market Cap: ${(info['marketCap'] / 1_000_000_000):.2f} Billion")
-print(f"Trailing PE: {info['trailingPE']}")
-print(f"Dividend Yield: {info['dividendYield']}%")
+print(f"Trailing PE: {info['trailingPE']:.2f}")
+print(f"Dividend Yield: {info['dividendYield'] * 100}%")
 
 
 # gets stock data from past 5 years
@@ -113,10 +114,10 @@ predictions = model.predict(X_test)
 
 # print predictions the model made
 # :10 because we slice it like a python list
-print ( f"\n{predictions[:10]}" )
+# print ( f"\n{predictions[:10]}" )
 
 ## see what actual results were
-print ( y_test.head(10) )
+# print ( y_test.head(10) )
 
 ## calculates accuracy of model using its results and the real results
 accuracy = accuracy_score (y_test, predictions)
@@ -129,11 +130,109 @@ tree_model.fit(X_train, y_train)
 tree_predictions = tree_model.predict(X_test)
 tree_accuracy = accuracy_score (y_test, tree_predictions)
 
+# now use random forest to create a different model
+# random forest is usually better than decision tree b/c it builds many different trees on different samples of data
+# n_estimators=100 means have the model build 100 decision trees
+forest_model = RandomForestClassifier(n_estimators=100, random_state=42)
+
+forest_model.fit(X_train, y_train)
+forest_predictions = forest_model.predict(X_test)
+forest_accuracy = accuracy_score (y_test, forest_predictions)
+
 # print both models accuracy
 print("\nModel Performance")
 print("--------------------")
 print(f"Logistic Regression: {accuracy:.2%}")
 print(f"Decision Tree: {tree_accuracy:.2%}")
+print(f"Random Forest: {forest_accuracy:.2%}")
+
+# see which model was the most accurate
+best_accuracy = accuracy
+best_prediction = predictions[-1]
+best_model_name = "Logistic Regression"
+
+if tree_accuracy > best_accuracy:
+    best_accuracy = tree_accuracy
+    best_prediction = tree_predictions[-1]
+    best_model_name = "Decision Tree"
+
+if forest_accuracy > best_accuracy:
+    best_accuracy = forest_accuracy
+    best_prediction = forest_predictions[-1]
+    best_model_name = "Random Forest"
+
+print(f"\nBest Model: {best_model_name} ({best_accuracy:.2%})" )
+
+
+# create a score variable to keep track of stock's good points
+score = 0
+max_score = 4
+
+# if model predicts stock will go up tmr -> score +1
+if best_prediction == 1:
+    score += 1
+
+# if todays price is > 20 day moving avg, increase score
+if data["Close"].iloc[-1] > data["MA_20"].iloc[-1]:
+    score += 1
+
+# if its RSI is > 14 (its not overbought) then increase score
+if data["RSI_14"].iloc[-1] < 70 and data["RSI_14"].iloc[-1] > 30 :
+    score += 1
+
+# factor in p/e
+pe = info["trailingPE"]
+
+if 10 <= pe <= 35:
+    score += 1
+
+# print out investment summary
+print("\nInvestment Summary")
+print("--------------------")
+
+print(f"Tomorrow's Stock Movement based on Best ML Model Prediction: {'Up' if best_prediction == 1 else 'Down'}")
+
+# if todays closing price is greater than 20 day moving avg
+if data["Close"].iloc[-1] > data["MA_20"].iloc[-1]:
+    print("20-Day Trend: Bullish")
+else:
+    print("20-Day Trend: Bearish")
+
+# print RSI
+rsi = data["RSI_14"].iloc[-1]
+print(f"RSI: {rsi:.2f}")
+
+# print RSI signal
+if rsi < 30:
+    print("RSI Signal: Oversold")
+elif rsi > 70:
+    print("RSI Signal: Overbought")
+else:
+    print("RSI Signal: Neutral")
+
+# display investment score and recommendation
+print(f"\nInvestment Score: {score}/{max_score}")
+
+if score / max_score >= .75:
+    print("Recommendation: Strong Buy")
+elif score / max_score >= .50:
+    print("Recommendation: Buy")
+elif score / max_score >= .25:
+    print("Recommendation: Hold")
+else:
+    print("Recommendation: Sell")
+
+
+# print feature importance
+print("\nRandom Forest Feature Importance")
+print("----------------------------------")
+
+for feature, importance in zip(X.columns, forest_model.feature_importances_):
+    print(f"{feature}: {(importance) * 100:.2f}%")
+
+print("\n(Higher percentages indicate greater influence on the Random Forest's predictions)")
+
+
 
 # create graph
 plt.figure ( figsize =(12,6) )
@@ -150,52 +249,3 @@ plt.ylabel("Price ($)")
 # display graph and legend
 plt.legend()
 plt.show()
-
-# create a score variable to keep track of stock's good points
-score = 0
-
-# if model predicts stock will go up tmr -> score +1
-if predictions[-1] == 1:
-    score += 1
-
-# if todays price is > 20 day moving avg, increase score
-if data["Close"].iloc[-1] > data["MA_20"].iloc[-1]:
-    score += 1
-
-# if its RSI is > 14 (its not overbought) then increase score
-if data["RSI_14"].iloc[-1] < 70:
-    score += 1
-
-
-# print out investment summary
-print("\nInvestment Summary")
-print("--------------------")
-
-print(f"Tomorrow's Stock Movement based on Machine Learning Prediction: {'Up' if predictions[-1] == 1 else 'Down'}")
-
-# if todays closing price is greater than 20 day moving avg
-if data["Close"].iloc[-1] > data["MA_20"].iloc[-1]:
-    print("20-Day Trend: Bullish")
-else:
-    print("20-Day Trend: Bearish")
-
-rsi = data["RSI_14"].iloc[-1]
-print(f"RSI: {rsi:.2f}")
-
-if rsi < 30:
-    print("RSI Signal: Oversold")
-elif rsi > 70:
-    print("RSI Signal: Overbought")
-else:
-    print("RSI Signal: Neutral")
-
-print(f"\nInvestment Score: {score}/3")
-
-if score == 3:
-    print("Recommendation: Strong Buy")
-elif score == 2:
-    print("Recommendation: Buy")
-elif score == 1:
-    print("Recommendation: Hold")
-else:
-    print("Recommendation: Sell")
