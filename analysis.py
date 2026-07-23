@@ -331,6 +331,7 @@ def display_investment_analysis(info, data, results):
     overall_score = score / max_score
     st.write(f"Overall Score: {score}/{max_score}  ({overall_score * 100:.2f}%)")
 
+
     if overall_score >= 0.85:
         recommendation = "Strong Buy"
     elif overall_score >= 0.70:

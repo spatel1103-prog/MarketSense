@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ee1dedce-b8dc-40bb-90d6-c55072b0c8e9" name="Changes" comment="Added investment analysis including ML predictions, technical indicators and fundamental analysis">
-      <change afterPath="$PROJECT_DIR$/stream_app.py" afterDir="false" />
+    <list default="true" id="ee1dedce-b8dc-40bb-90d6-c55072b0c8e9" name="Changes" comment="Built initial Streamlit web app interface">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stream_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/stream_app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/visualization.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualization.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +79,7 @@
       <option name="presentableId" value="Default" />
       <updated>1784148946534</updated>
       <workItem from="1784148947829" duration="14646000" />
-      <workItem from="1784577386263" duration="28665000" />
+      <workItem from="1784577386263" duration="32051000" />
     </task>
     <task id="LOCAL-00001" summary="Implemented initial stock data processing and features">
       <option name="closed" value="true" />
@@ -127,7 +129,23 @@
       <option name="project" value="LOCAL" />
       <updated>1784822456018</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Built initial Streamlit web app interface">
+      <option name="closed" value="true" />
+      <created>1784832113852</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1784832113852</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Built initial Streamlit web app interface">
+      <option name="closed" value="true" />
+      <created>1784832172716</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1784832172716</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -140,13 +158,14 @@
     <MESSAGE value="Added investment recommendation and Decision Tree model" />
     <MESSAGE value="Implemented new ML models and compared their accuracy, displayed feature importance of model, refactored code into multiple Python files" />
     <MESSAGE value="Added investment analysis including ML predictions, technical indicators and fundamental analysis" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added investment analysis including ML predictions, technical indicators and fundamental analysis" />
+    <MESSAGE value="Built initial Streamlit web app interface" />
+    <option name="LAST_COMMIT_MESSAGE" value="Built initial Streamlit web app interface" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/MarketSense$main.coverage" NAME="main Coverage Results" MODIFIED="1784815603736" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MarketSense$model.coverage" NAME="model Coverage Results" MODIFIED="1784816186486" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MarketSense$analysis.coverage" NAME="analysis Coverage Results" MODIFIED="1784822057740" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MarketSense$stream_app.coverage" NAME="stream_app Coverage Results" MODIFIED="1784822780135" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/MarketSense$app.coverage" NAME="app Coverage Results" MODIFIED="1784822060357" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MarketSense$app.coverage" NAME="app Coverage Results" MODIFIED="1784843838988" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

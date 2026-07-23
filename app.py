@@ -4,7 +4,6 @@ from model import train_models
 from analysis import (
     print_company_info,
     print_model_performance,
-    print_investment_summary,
     print_investment_analysis,
     print_feature_importance,
 )

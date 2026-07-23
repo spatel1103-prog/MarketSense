@@ -2,7 +2,8 @@ import matplotlib.pyplot as plt
 
 def plot_stock (data, ticker):
     # create graph
-    plt.figure(figsize=(12, 6))
+
+    fig = plt.figure(figsize=(12, 6))
 
     # draws lines on the graph
     plt.plot(data.index, data["Close"], label="Closing Price")
@@ -15,4 +16,5 @@ def plot_stock (data, ticker):
 
     # display graph and legend
     plt.legend()
-    plt.show()
+
+    return fig
