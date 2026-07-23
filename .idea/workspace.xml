@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ee1dedce-b8dc-40bb-90d6-c55072b0c8e9" name="Changes" comment="Added investment recommendation and Decision Tree model">
-      <change afterPath="$PROJECT_DIR$/analysis.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/visualization.py" afterDir="false" />
+    <list default="true" id="ee1dedce-b8dc-40bb-90d6-c55072b0c8e9" name="Changes" comment="Implemented new ML models and compared their accuracy, displayed feature importance of model, refactored code into multiple Python files">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/indicators.py" beforeDir="false" afterPath="$PROJECT_DIR$/indicators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/model.py" afterDir="false" />
     </list>
@@ -54,6 +51,7 @@
     "Python.analysis.executor": "Run",
     "Python.app.executor": "Run",
     "Python.main.executor": "Run",
+    "Python.model.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -80,7 +78,7 @@
       <option name="presentableId" value="Default" />
       <updated>1784148946534</updated>
       <workItem from="1784148947829" duration="14646000" />
-      <workItem from="1784577386263" duration="12903000" />
+      <workItem from="1784577386263" duration="25027000" />
     </task>
     <task id="LOCAL-00001" summary="Implemented initial stock data processing and features">
       <option name="closed" value="true" />
@@ -114,7 +112,15 @@
       <option name="project" value="LOCAL" />
       <updated>1784589694801</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Implemented new ML models and compared their accuracy, displayed feature importance of model, refactored code into multiple Python files">
+      <option name="closed" value="true" />
+      <created>1784733547898</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1784733547898</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -125,11 +131,13 @@
     <MESSAGE value="Completed feature engineering for ML dataset" />
     <MESSAGE value="Trained baseline logistic regression model" />
     <MESSAGE value="Added investment recommendation and Decision Tree model" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added investment recommendation and Decision Tree model" />
+    <MESSAGE value="Implemented new ML models and compared their accuracy, displayed feature importance of model, refactored code into multiple Python files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented new ML models and compared their accuracy, displayed feature importance of model, refactored code into multiple Python files" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/MarketSense$main.coverage" NAME="main Coverage Results" MODIFIED="1784731827832" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/MarketSense$analysis.coverage" NAME="analysis Coverage Results" MODIFIED="1784733289262" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/MarketSense$app.coverage" NAME="app Coverage Results" MODIFIED="1784733366337" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MarketSense$main.coverage" NAME="main Coverage Results" MODIFIED="1784815603736" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MarketSense$model.coverage" NAME="model Coverage Results" MODIFIED="1784816186486" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MarketSense$analysis.coverage" NAME="analysis Coverage Results" MODIFIED="1784822057740" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MarketSense$app.coverage" NAME="app Coverage Results" MODIFIED="1784822060357" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

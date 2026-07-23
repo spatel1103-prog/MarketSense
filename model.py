@@ -8,11 +8,19 @@ from sklearn.ensemble import RandomForestClassifier
 
 def train_models(data):
 
-    # make a column that has the next days closing price using shift
-    data["Close_Shifted"] = data["Close"].shift(-1)
+    FUTURE_DAYS = 126
 
-    # create column named tomorrow_up that displays 1 if it goes up the next day and 0 if it goes down
-    data["Tomorrow_Up"] = (data["Close_Shifted"] > data["Close"]).astype(int)
+    # make a column that has the future days closing price using shift
+    data["Future_Close"] = data["Close"].shift(-FUTURE_DAYS)
+
+    # make a new column to create percentage return over 6 months
+    data["Future_Return"] = (data["Future_Close"] - data["Close"]) / data["Close"]
+
+    # we want to check if future return is at least 10%
+    TARGET_RETURN = 0.10
+
+    # create column named future_up that displays 1 if its future return is at least 10% and 0 otherwise
+    data["Future_Up"] = (data["Future_Return"] >= TARGET_RETURN).astype(int)
 
     # remove rows with NaN
     clean_data = data.dropna()
@@ -23,7 +31,7 @@ def train_models(data):
         "Volatility_20", "Volume_Change", "RSI_14"
     ]]
 
-    y = clean_data["Tomorrow_Up"]
+    y = clean_data["Future_Up"]
 
     # train on 80% of the data and test on 20%
     # dont shuffle data because this data is chronological
@@ -38,7 +46,7 @@ def train_models(data):
     # predictions is a NumPy array now not a dataframe
     predictions = model.predict(X_test)
 
-    ## calculates accuracy of model using its results and the real results
+    # calculates accuracy of model using its results and the real results
     accuracy = accuracy_score(y_test, predictions)
 
     # now use decision tree model to compare against logistics regression model

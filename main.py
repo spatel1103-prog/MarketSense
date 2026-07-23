@@ -233,7 +233,6 @@ for feature, importance in zip(X.columns, forest_model.feature_importances_):
 print("\n(Higher percentages indicate greater influence on the Random Forest's predictions)")
 
 
-
 # create graph
 plt.figure ( figsize =(12,6) )
 

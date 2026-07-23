@@ -5,6 +5,7 @@ from analysis import (
     print_company_info,
     print_model_performance,
     print_investment_summary,
+    print_investment_analysis,
     print_feature_importance,
 )
 from visualization import plot_stock
@@ -24,8 +25,8 @@ results = train_models(data)
 
 print_model_performance(results)
 
-print_investment_summary(info, data, results)
-
 print_feature_importance(results)
+
+print_investment_analysis(info, data, results)
 
 plot_stock(data, ticker)
